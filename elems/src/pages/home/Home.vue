@@ -21,33 +21,32 @@
 		    </group>
 		    <div class="hot_list_wrap">
 		    	<ul class="ul_list">
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
+		    		<li v-for="(hotCity,index) of hotCityList" :keys="index">
+		    		<router-link :to='{name:"SelectCity",params:{id:hotCity.id}}'>
+		    			{{hotCity.name}}
+			    	</router-link>
+		    		</li>
 		    	</ul>
 		    </div>	 
 	    </div>
 	    <!-- 热门城市 end-->
 	    <!-- 所有 start-->
 	    <div class="all_city_wrap">
-	    	<div class="all_city_hd">
-	    		<p>A <span>(按照字母排序)</span>  </p>
-	    	</div>
-		    <div class="all_list_wrap">
-		    	<ul class="ul_list">
-		    		<a href=""><li class="ellipsis">厦门厦门厦门厦门厦门厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    		<a href=""><li>厦门</li></a>
-		    	</ul>
-		    </div>	 
+			<div v-for="(citys,key,index) of sortallCityList" :key="key" class="wrap">
+				<div class="all_city_hd">
+	    			<p>{{key}} <span v-if="index == 0">(按照字母排序)</span>  </p>
+		    	</div>
+			    <div class="all_list_wrap clear">
+			    	<ul class="ul_list">
+			    		<li v-for="(city,key,index) of citys" :key="key" class="ellipsis">
+			    			<router-link :to='{name:"SelectCity",params:{id:city.id}}'>
+				    			{{city.name}}
+				    		</router-link>
+			    		</li>
+			    	</ul>
+			    </div>	 
+			</div>			
+		
 	    </div>
 	    <!-- 热门城市 end-->	    
 
@@ -74,10 +73,10 @@ export default {
 
   methods:{
   	 GetHotCity(){
-  		this.$store.dispatch("GetAllCity","hot");
+  		this.$store.dispatch("GetHotCity");
   	},
   	GetAllCity(){
-  		this.$store.dispatch("GetAllCity","group");
+  		this.$store.dispatch("GetAllCity");
   	},
   },
 
@@ -89,11 +88,21 @@ export default {
   	allCityList(){
   		return this.$store.state.allCityList;
   	},
+  	//  A-Z 排序  String.fromCharCode(i) 返回对应码的字符 65-->A
+    sortallCityList(){
+        let sortobj = {};
+        for (let i = 65; i <= 90; i++) {
+            if (this.allCityList[String.fromCharCode(i)]) {
+                sortobj[String.fromCharCode(i)] = this.allCityList[String.fromCharCode(i)];
+            }
+        }
+        return sortobj
+    }  	
   },
 
   created(){
-  	this.GetAllCity();
   	this.GetHotCity();
+  	this.GetAllCity();
   },
 
   mounted(){
@@ -108,6 +117,7 @@ export default {
 
 <style lang="less">
 .ellipsis{text-overflow:ellipsis; white-space: nowrap; overflow: hidden;}
+.clear{clear: both;}
 .home_wrap{
 	.home_header{
 		a{
@@ -130,25 +140,31 @@ export default {
 			p{padding-left: 10px;}
 		}
 		.ul_list{
-			width: 100%;box-sizing: border-box;
+			width: 100%;box-sizing: border-box;position: relative;
 			li{
 				border:1px solid #E4E4E4;border-bottom:none;width: 24.5%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #3190E8;
+
 			}
 		}
 	}
 
 	.all_city_wrap{
 		border-bottom: 1px solid #E4E4E4;background: white;
-		.all_city_hd{
-			height: 3rem;line-height: 3rem;
-			p{padding-left: 10px;}
-		}
-		.ul_list{
-			width: 100%;box-sizing: border-box;
-			li{
-				border:1px solid #E4E4E4;width: 24.5%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #666666;font-size: 0.8rem;
+		.wrap{
+			overflow: hidden;border-bottom: 1px solid #E4E4E4;
+			.all_city_hd{
+				height: 3rem;line-height: 3rem;
+				p{padding-left: 10px;}
+			}
+			.ul_list{
+				width: 100%;box-sizing: border-box;
+				li{
+					border:1px solid #E4E4E4;width: 24.5%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #666666;font-size: 0.8rem;
+					a{color: #666666;}
+				}
 			}
 		}
+
 	}	
 }
 

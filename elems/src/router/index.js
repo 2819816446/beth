@@ -4,6 +4,7 @@ import store from '../store/index.js'
 import HelloWorld from '@/components/HelloWorld'
 import App from '../App.vue'
 import Home from '../pages/home/Home.vue'
+import SelectCity from '../pages/SelectCity/SelectCity.vue'
 
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ Vue.use(Router)
       		path:'/home',
       		name:'Home',
       		component:Home
+      	},
+      	{
+      		path:'cities/:id',
+      		name:'SelectCity',
+      		component:SelectCity
       	}
 
       ]

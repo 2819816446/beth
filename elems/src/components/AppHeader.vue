@@ -1,6 +1,6 @@
 <template>
   <div class="hd_wrap">
-    <x-header :left-options="{backText:'elem.me',showBack:isShowBack}" >
+    <x-header :left-options="{backText:'',showBack:isShowBack}" >
       <strong v-if="isShowTitle">{{title}}</strong>
       <a v-if="!isShowBack" slot="left"><x-icon type="ios-search" size="30" class="x-icon-search-white"></x-icon></a>
       <a slot="right"></x-icon>登入 | 注册</a>
@@ -20,9 +20,15 @@ export default {
   },
   data () {
     return {
-      title: '',
       isShowTitle:true,
       isShowBack:true     //是否显示返回图标；true 显示，false不显示。
+    }
+  },
+
+  // props接收父组件的数据title ，父组件没传title时  默认
+  props:{
+    title:{
+      default:"默认"
     }
   },
 
