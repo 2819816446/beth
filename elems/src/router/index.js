@@ -5,6 +5,7 @@ import HelloWorld from '@/components/HelloWorld'
 import App from '../App.vue'
 import Home from '../pages/home/Home.vue'
 import SelectCity from '../pages/SelectCity/SelectCity.vue'
+import MySite from '../pages/MySite/MySite.vue'
 
 
 Vue.use(Router)
@@ -30,7 +31,12 @@ Vue.use(Router)
       		path:'cities/:id',
       		name:'SelectCity',
       		component:SelectCity
-      	}
+      	},
+        {
+          path:'/mysite',
+          name:'MySite',
+          component:MySite
+        }
 
       ]
     }, 

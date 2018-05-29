@@ -2,23 +2,30 @@
 	<div class="selectCity_wrap">
 		<app-header :title="headTitle"></app-header>
 		<div class="input_wrap" >
-			<input type="text" placeholder="输入学校、商务楼、地址">
-			<p>提交</p>
+			<input type="text" placeholder="输入学校、商务楼、地址" v-model="keyword" @keyup.enter="getAddress">
+			<p @click="getAddress()" >提交</p>
 		</div>
 
-		<div class="search_history">
+		<!-- 点击后的搜索历史 -->
+		<div class="search_history" v-if="addRessList">
+			<div v-for="(address,key,index) of addRessList" class="history_list" :key="key">
+			<router-link :to='{name:"MySite",query:{geohash:address.geohash}}'>
+				<p>{{address.name}}</p>
+				<span>{{address.address}}</span>
+			</router-link>
+			</div>
+		</div>
+
+		<div class="search_history" v-if="!addRessList.length">
 			<p class="f">搜索历史</p>
-			<div class="history_list">
-				<p>南京路</p>
-				<span>xxx路xxx街xxx路xxx街</span>
+			<div v-for="(address,key,index) of SHistory" class="history_list" :key="key" >
+			<router-link :to='{name:"MySite",query:{geohash:address.geohash}}'>
+				<p>{{address.name}}</p>
+				<span>{{address.address}}</span>
+			</router-link>
 			</div>
 
-			<div class="history_list">
-				<p>南京路</p>
-				<span>xxx路xxx街xxx路xxx街</span>
-			</div>	
-
-			<p class="clear_all">清空所有</p>		
+			<p v-if="this.addRessList.length" class="clear_all" @click="clearAllAddress()">清空所有</p>		
 		</div>
 	</div>
 </template>
@@ -27,19 +34,26 @@
 // 组件里都是用 this.$store 访问数据
 	import axios from 'axios'
 	import AppHeader from '../../components/AppHeader.vue'
+	import { Toast} from 'vux'
 	
 	export default{
 		name:'SelectCity',
 		data(){
 			return{
-				headTitle:""
+				headTitle:"",
+				keyword:"",
+				city_id:"",
+				addRessList:[]
 			};
 		},
 		components:{
+			Toast,
 			"app-header":AppHeader,
 		},
 		computed:{
-
+			SHistory(){
+				return JSON.parse(localStorage.SearchHistory);	//[{},{}...]
+			}
 		},
 		methods:{
 			// http://cangdu.org:8001/v1/cities/:id
@@ -52,10 +66,48 @@
 				  .then(function (response) {		//{data:{[],[]...}}
 				    console.log(response.data);		//{[],[]...}
 					_this.headTitle = response.data.name;
+					_this.city_id = response.data.id;
 				  })
 				  .catch(function (error) {
 				    console.log(error);
 				 });
+			},
+
+			getAddress(){
+				var _this = this;
+				var city_id  = this.city_id;
+				var keyword = this.keyword;
+				var url ='http://cangdu.org:8001/v1/pois/';
+				axios.get(url,{
+						params:{
+						city_id:city_id,
+						keyword:keyword,
+						type:'search'
+					}
+				})
+				  .then(function (response) {		//{data:{[],[]...}}
+				    console.log(response.data);		//{[],[]...}
+				    if (response.data.message=="参数错误") {
+					   _this.$vux.toast.show({
+						   	text:'请填写关键字！',
+						   	position:'top',
+						   	type:'text',
+						   	time:3000
+						});
+				    }else{
+
+					    _this.addRessList =response.data; 
+				    }
+
+				  })
+				  .catch(function (error) {
+				    console.log("getAddress异常");
+				    console.log(error);
+				 });				
+
+			},
+			clearAllAddress(){
+				this.addRessList = [];
 			}	
 		
 

@@ -7,8 +7,12 @@ import App from './App'
 import store from './store/index.js'
 // import Home from './components/HelloFromVux'
 import router from './router/index.js'
+// 当 Toast 为插件使用时需要如下声明
+import {ToastPlugin} from 'vux'
 
 Vue.use(VueRouter)
+Vue.use(ToastPlugin)
+
 
 // const routes = [{
 //   path: '/',
