@@ -1,7 +1,7 @@
 <template>
 	<div class="selectCity_wrap">
-		<app-header :title="headTitle"></app-header>
-		mysite
+		<app-header :title="headTitle" :isShowBack="false"></app-header>
+		<app-footer></app-footer>
 	</div>
 </template>
 
@@ -9,6 +9,7 @@
 // 组件里都是用 this.$store 访问数据
 	import axios from 'axios'
 	import AppHeader from '../../components/AppHeader.vue'
+	import AppFooter from '../../components/AppFooter.vue'
 	
 	export default{
 		name:'MySite',
@@ -19,6 +20,7 @@
 		},
 		components:{
 			"app-header":AppHeader,
+			"app-footer":AppFooter
 		},
 		computed:{
 

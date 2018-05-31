@@ -1,7 +1,15 @@
 <template>
   <div class="hd_wrap">
     <x-header :left-options="{backText:'',showBack:isShowBack}" >
-      <strong v-if="isShowTitle">{{title}}</strong>
+
+      <!-- 左边显示返回时，title不加 链接 -->
+      <strong v-if="isShowBack" ><span v-if="isShowTitle">{{title}}</span></strong>
+      
+      <!-- 左边显示搜索时（不显示返回），title加 返回城市选择的 链接  -->
+      <router-link :to='{path:"/home"}' v-if="!isShowBack">
+         <strong v-if="isShowTitle">{{title}}</strong>
+      </router-link>
+      <!-- 左边显示搜索 -->
       <a v-if="!isShowBack" slot="left"><x-icon type="ios-search" size="30" class="x-icon-search-white"></x-icon></a>
       <a slot="right"></x-icon>登入 | 注册</a>
       
@@ -21,7 +29,7 @@ export default {
   data () {
     return {
       isShowTitle:true,
-      isShowBack:true     //是否显示返回图标；true 显示，false不显示。
+      // isShowBack:true     //是否显示返回图标；true 显示，false不显示。
     }
   },
 
@@ -29,6 +37,9 @@ export default {
   props:{
     title:{
       default:"默认"
+    },
+    isShowBack:{
+      default:true
     }
   },
 
@@ -44,4 +55,5 @@ export default {
 <style>
 .hd_wrap{width: 100%;height: 3rem;}
 .x-icon-search-white{fill: white;margin-top: -5px;}
+.hd_wrap a{color:white;}
 </style>
