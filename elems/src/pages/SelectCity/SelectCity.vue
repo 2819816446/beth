@@ -52,7 +52,11 @@
 		},
 		computed:{
 			SHistory(){
-				return JSON.parse(localStorage.SearchHistory);	//[{},{}...]
+				if (localStorage.SearchHistory) {
+					return JSON.parse(localStorage.SearchHistory);	//[{},{}...]
+				}else{
+					return [];
+				}
 			}
 		},
 		methods:{
