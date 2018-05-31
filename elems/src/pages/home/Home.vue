@@ -142,7 +142,7 @@ export default {
 		.ul_list{
 			width: 100%;box-sizing: border-box;position: relative;
 			li{
-				border:1px solid #E4E4E4;border-bottom:none;width: 24.5%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #3190E8;
+				border:1px solid #E4E4E4;border-bottom:none;width: 24.3%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #3190E8;
 
 			}
 		}
@@ -159,7 +159,7 @@ export default {
 			.ul_list{
 				width: 100%;box-sizing: border-box;
 				li{
-					border:1px solid #E4E4E4;width: 24.5%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #666666;font-size: 0.8rem;
+					border:1px solid #E4E4E4;width: 24.3%;height: 3rem;float: left;list-style: none;text-align: center;line-height: 3rem;color: #666666;font-size: 0.8rem;
 					a{color: #666666;}
 				}
 			}
