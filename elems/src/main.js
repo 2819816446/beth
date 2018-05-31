@@ -9,6 +9,7 @@ import store from './store/index.js'
 import router from './router/index.js'
 import './assets/font/iconfont.css'
 
+
 // 当 Toast 为插件使用时需要如下声明
 import {ToastPlugin} from 'vux'
 
