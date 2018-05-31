@@ -6,15 +6,15 @@
             <p>首页</p>
         </li>
         
-        <li class="active">
-            <i class="iconfont icon-shouye"></i>
-            <p>首页</p>
+        <li class="">
+            <i class="iconfont icon-sousuo"></i>
+            <p>搜索</p>
         </li>
-        <li class="active">
-            <i class="iconfont icon-04"></i>
-            <p>首页</p>
+        <li class="">
+            <i class="iconfont icon-shouji"></i>
+            <p>订单</p>
         </li>
-        <li class="active">
+        <li class="">
             <i class="iconfont icon-04"></i>
             <p>我的</p>
         </li>        
