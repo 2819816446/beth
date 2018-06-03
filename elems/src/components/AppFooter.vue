@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style>
-    .fd_wrap{height: 3rem;border-top: 1px solid gray;width: 100%;position: fixed;bottom: 0;left: 0;}
+    .fd_wrap{height: 3rem;border-top: 1px solid gray;width: 100%;position: fixed;bottom: 0;left: 0;z-index: 100;background: #F2F2F2;}
     .fd_wrap ul{display: flex;}
     .fd_wrap ul li{flex: 1;list-style: none;text-align: center;height: 3rem;color: #A4A4A4;}
     

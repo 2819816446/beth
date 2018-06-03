@@ -57,11 +57,79 @@
 						</div>
 						<div class="floor_2 clear">
 							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
-							<p class="s">蜂鸟.准时达</p>
+							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
 						</div>
 						<div class="floor_3">
 							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里/40分钟</p>
+							<p class="p">10公里 / <span class="time">40分钟</span></p>
+						</div>												
+					</div>
+				</li>
+				<li>
+					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+					<div class="m2_content">
+						<div class="floor_1">
+							<p class="store"><span>品牌</span> 店铺名称 </p>
+							<p class="z">保、准、票</p>
+						</div>
+						<div class="floor_2 clear">
+							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
+							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
+						</div>
+						<div class="floor_3">
+							<p class="peisong">20起送，配送费20 </p>
+							<p class="p">10公里 / <span class="time">40分钟</span></p>
+						</div>												
+					</div>
+				</li>
+				<li>
+					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+					<div class="m2_content">
+						<div class="floor_1">
+							<p class="store"><span>品牌</span> 店铺名称 </p>
+							<p class="z">保、准、票</p>
+						</div>
+						<div class="floor_2 clear">
+							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
+							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
+						</div>
+						<div class="floor_3">
+							<p class="peisong">20起送，配送费20 </p>
+							<p class="p">10公里 / <span class="time">40分钟</span></p>
+						</div>												
+					</div>
+				</li>
+				<li>
+					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+					<div class="m2_content">
+						<div class="floor_1">
+							<p class="store"><span>品牌</span> 店铺名称 </p>
+							<p class="z">保、准、票</p>
+						</div>
+						<div class="floor_2 clear">
+							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
+							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
+						</div>
+						<div class="floor_3">
+							<p class="peisong">20起送，配送费20 </p>
+							<p class="p">10公里 / <span class="time">40分钟</span></p>
+						</div>												
+					</div>
+				</li>
+				<li>
+					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+					<div class="m2_content">
+						<div class="floor_1">
+							<p class="store"><span>品牌</span> 店铺名称 </p>
+							<p class="z">保、准、票</p>
+						</div>
+						<div class="floor_2 clear">
+							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
+							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
+						</div>
+						<div class="floor_3">
+							<p class="peisong">20起送，配送费20 </p>
+							<p class="p">10公里 / <span class="time">40分钟</span></p>
 						</div>												
 					</div>
 				</li>
@@ -80,7 +148,10 @@
 		name:'MySite',
 		data(){
 			return{
-				headTitle:""
+				headTitle:"",
+				latitude:"",
+				longitude:"",
+				restaurants:[]
 			};
 		},
 		components:{
@@ -91,6 +162,18 @@
 
 		},
 		methods:{
+			/**
+			 * /
+			 * @return {[obj]}
+			 *  {
+				  address: "上海市黄浦区西藏中路",
+				  city: "上海市",
+				  geohash: "31.22967,121.4762",
+				  latitude: "31.22967",
+				  longitude: "121.4762",
+				  name: "黄浦区上海人民广场"
+				}
+			 */
 			getDetailAddress(){
 				var _this = this;
 				var geohash = this.$route.query.geohash;
@@ -99,7 +182,29 @@
 				  .then(function (response) {		//{data:{[],[]...}}
 				    console.log(response.data);		//{[],[]...}
 					_this.headTitle = response.data.name;   //根据经纬度获取地位的地点名称
+					_this.latitude = response.data.latitude;
+					_this.longitude = response.data.longitude;
 					_this.$store.commit("SearchHistoryToLacal",response.data); //搜索历史保存在本地
+				  })
+				  .catch(function (error) {
+				    console.log(error);
+				 });
+			},
+
+			getShops(){
+				var _this = this;
+				var latitude  = this.latitude;
+				var longitude = this.longitude;
+				console.log("latitude:"+latitude);
+				axios.get("http://cangdu.org:8001/shopping/restaurants",{
+					params:{
+						latitude:latitude,
+						longitude:longitude
+					}
+				})
+				  .then(function (response) {		//{data:{[],[]...}}
+				    console.log("获取restaurants成功");		//{[],[]...}
+				    _this.restaurants = response.data;
 				  })
 				  .catch(function (error) {
 				    console.log(error);
@@ -108,7 +213,6 @@
 
 		},
 		mounted(){
-			
 
 		},
 		beforeCreate(){
@@ -117,6 +221,9 @@
 		},
 		created(){
 			this.getDetailAddress();
+			this.getShops();
+
+
 		},
 
 		watch:{
@@ -133,7 +240,7 @@
 	.clear{clear: both;}
 	.mySite_wrap{background: #F5F5F5;}
 	.mySite_wrap li{list-style: none;}
-	.m1{height: 11rem;width: 100%;background: white;}
+	.m1{height: 11rem;width: 100%;background: white;margin-top: 3rem;}
 	.m1 img{width: 3rem;height: 3rem;}
 	.m1 ul{height: 9.3rem;}
 	.m1 ul li{width: 25%;height: 4rem;text-align: center;float: left;padding-bottom: 0.5rem;}
@@ -147,20 +254,27 @@
 	.m2{margin-top: 1rem;background: white;width: 100%;box-sizing: border-box;padding: 1rem 0.5rem;}
 	.m2 p span{font-size: 1rem;line-height: 1.2rem;}
 	.m2 .floor_1 p i{font-size: 1.2rem;line-height: 1.2rem;}
-	.m2 ul li{width: 100%;height: 6rem;padding:1rem 0.5rem;border-bottom: 1px solid #E6E6E6;}
+	.m2 ul li{width: 100%;height: 8rem;padding:1rem 0.5rem;border-bottom: 1px solid #E6E6E6;box-sizing: border-box;}
+	.m2 ul li:last-child{margin-bottom: 1.5rem;}
 	.m2 li img{width: 4rem;height: 4rem;padding: 0.5rem 0;display: inline-block;float: left;}
-	.m2 .m2_content{float: left;height: 5rem;box-sizing: border-box;padding: 0.3rem;width: 75%;}
+	.m2 .m2_content{float: left;height: 5rem;box-sizing: border-box;padding: 0.3rem;width: 77%;}
 	.m2 .store{float: left;}
 	.m2 .store span{display: inline-block;width: 3rem;height: 1.2rem;text-align: center;background: #FFD930;border-radius:0.1rem;}
 	.m2 .z{float: right;}
 	
 	.m2 .floor_2 p{height: 2rem;line-height: 2rem;}
+	.m2 .floor_2 p span{font-size:0.7rem;}
 	.m2 .floor_2 p.pingjia {font-size: 0.7rem;float: left;}
 	.m2 p.pingjia span{font-size: 0.7rem;}
-	.m2 .floor_2 .s{float: right;}
+	.m2 .floor_2 .s{float: right;font-size: 0.7rem;}
+	.feng{width: 2rem;height: 0.5rem;color: white;text-align: center;background:#3190E8;}
+	.zhunshida{color: #3190E8;border: 1px solid #3190E8;}
 
 	
 	.m2 .floor_3 p.peisong {font-size: 0.7rem;float: left;}
+	.m2 .floor_3 p span,.m2 .floor_3 p{font-size:0.7rem;}
+
 	/*.m2 p.pingjia span{font-size: 0.7rem;}*/
 	.m2 .floor_3 p.p{float: right;}
+	.m2 .floor_3 .time{color: #3190E8;}
 </style>

@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style>
-.hd_wrap{width: 100%;height: 3rem;}
+.hd_wrap{width: 100%;height: 3rem;position:fixed;top: 0;left: 0;}
 .x-icon-search-white{fill: white;margin-top: -5px;}
 .hd_wrap a{color:white;}
 </style>

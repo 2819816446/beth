@@ -141,6 +141,7 @@
 
 
 <style>
+.selectCity_wrap{margin-top: 3rem;}
 	.input_wrap{width: 100;height: 6rem;background: white;margin-top: 1rem;padding: 1rem;}
 	.input_wrap input{width: 100%;height: 2rem;margin: 0 auto;}
 	.input_wrap p{width:100%;margin-top: 1rem;height: 2rem;background: #3190E8;color: white;border-radius: 5px;text-align: center;font-size: 1.2rem;}
