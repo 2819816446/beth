@@ -1,0 +1,157 @@
+<template>
+	<div class="selectCity_wrap">
+		<app-header :title="headTitle"></app-header>
+		<app-footer></app-footer>
+
+		<div class="input_wrap" >
+			<input type="text" placeholder="输入店铺名称或美食" v-model="keyword" @keyup.enter="searchRestrun()">
+			<p @click="searchRestrun()" >提交</p>
+		</div>
+
+		<!-- 点击后的搜索历史 -->
+		<div class="search_history" v-if="restRanList">
+			<div v-for="(Restran,index,key) of restRanList" class="history_list" :key="key">
+			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
+				<p style="float:left;">{{Restran.name}} </p>
+				<p style="float:right;">X</p>
+				
+			<!-- </router-link> -->
+			</div>
+		</div>
+
+		<div class="search_history" v-if="!restRanList.length">
+			<p class="f">搜索历史</p>
+			<div v-for="(Restran,index,key) of RestranHistory" class="history_list" :key="key" >
+			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
+				<p style="float:left;">{{Restran.name}} </p>
+				<p style="float:right;">X</p>
+			<!-- </router-link> -->
+			</div>
+
+			<p v-if="this.restRanList.length" class="clear_all" @click="clearAllRestran()">清空所有</p>		
+		</div>
+	</div>
+</template>
+
+<script>
+// 组件里都是用 this.$store 访问数据
+	import axios from 'axios'
+	import AppHeader from '../../components/AppHeader.vue'
+	import AppFooter from '../../components/AppFooter.vue'
+	import { Toast} from 'vux'
+	
+	export default{
+		name:'Search',
+		data(){
+			return{
+				headTitle:"",
+				keyword:"",
+				city_id:"",
+				restRanList:[]
+			};
+		},
+		components:{
+			Toast,
+			"app-header":AppHeader,
+			"app-footer":AppFooter
+		},
+		computed:{
+			RestranHistory(){
+				if (localStorage.RestranHistory) {
+					return JSON.parse(localStorage.RestranHistory);	//[{},{}...]
+				}else{
+					return [];
+				}
+			}
+		},
+		methods:{
+			// http://cangdu.org:8001/v4/restaurants
+			/*
+			geohash 
+			keyword 
+			 */
+			getTitle(){
+				this.headTitle = "搜索";
+
+			},
+
+			searchRestrun(){
+				var _this = this;
+				var geohash  = this.$store.state.geohash;
+				var keyword = this.keyword;
+				var url ='http://cangdu.org:8001/v4/restaurants/';
+				axios.get(url,{
+						params:{
+						geohash:geohash,
+						keyword:keyword
+					}
+				})
+				  .then(function (response) {		//{data:{[],[]...}}
+				    console.log(response.data);		//{[],[]...}
+				    if (response.data.status==0) {
+					   _this.$vux.toast.show({
+						   	text:'请填写关键字！',
+						   	position:'top',
+						   	type:'text',
+						   	time:3000
+						});
+				    }else{
+
+					    _this.restRanList =response.data; 
+						_this.$store.commit("SearchRestranHistoryToLacal",response.data); //搜索历史保存在本地
+
+
+				    }
+
+				  })
+				  .catch(function (error) {
+				    console.log("searchRestrun异常");
+				    console.log(error);
+				 });				
+
+			},
+			clearAllRestran(){
+				this.restRanList = [];
+			}	
+		
+
+		},
+		mounted(){
+			
+
+
+		},
+		beforeCreate(){
+
+
+		},
+		created(){
+			this.getTitle();
+
+		},
+
+		watch:{
+
+		},
+
+
+	};
+	
+</script>
+
+
+<style>
+.selectCity_wrap{margin-top: 3rem;}
+	.input_wrap{width: 100;height: 6rem;background: white;margin-top: 1rem;padding: 1rem;}
+	.input_wrap input{width: 100%;height: 2rem;margin: 0 auto;}
+	.input_wrap p{width:100%;margin-top: 1rem;height: 2rem;background: #3190E8;color: white;border-radius: 5px;text-align: center;font-size: 1.2rem;}
+
+
+	.search_history p.f{border-bottom: 1px solid #EAEAEA;margin-left: 1rem;}
+
+	.history_list{width: 100%;height: 3rem;background: white;padding: 0.5rem;box-sizing: border-box;border-bottom: 2px solid #EAEAEA;}
+	.history_list p{font-size: 1.2xxx路xxx街xxx路xxx街rem;}
+	.history_list span{font-size: 1rem;color: #999999;}
+
+	.clear_all{width: 100%;height: 2.5rem;background:white;text-align: center;line-height: 2.5rem;font-size: 1.3rem;color: #666666;}
+</style>

@@ -6,6 +6,7 @@ import App from '../App.vue'
 import Home from '../pages/home/Home.vue'
 import SelectCity from '../pages/SelectCity/SelectCity.vue'
 import MySite from '../pages/MySite/MySite.vue'
+import Search from '../pages/Search/Search.vue'
 
 
 Vue.use(Router)
@@ -32,6 +33,11 @@ Vue.use(Router)
       		name:'SelectCity',
       		component:SelectCity
       	},
+        {
+          path:'/search',
+          name:'Search',
+          component:Search
+        },
         {
           path:'/mysite',
           name:'MySite',

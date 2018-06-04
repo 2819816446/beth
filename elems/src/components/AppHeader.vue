@@ -10,7 +10,7 @@
          <strong v-if="isShowTitle">{{title}}</strong>
       </router-link>
       <!-- 左边显示搜索 -->
-      <a v-if="!isShowBack" slot="left"><x-icon type="ios-search" size="30" class="x-icon-search-white"></x-icon></a>
+      <a @click="goSearch()" v-if="!isShowBack" slot="left"><x-icon type="ios-search" size="30" class="x-icon-search-white"></x-icon></a>
       <a slot="right"></x-icon>登入 | 注册</a>
       
     </x-header>
@@ -44,7 +44,9 @@ export default {
   },
 
   methods:{
-
+    goSearch(){
+      this.$router.push('/search');
+    }
   },
 
   
