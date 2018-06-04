@@ -48,91 +48,24 @@
 		<div class="m2">
 			<p><i class="iconfont icon-tiyan"></i> <span>附近商家</span></p>
 			<ul>
-				<li>
-					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+				<li v-for="(restaurant,key,index) of restaurants" :key="key">
+					<img v-bind:src="'https://elm.cangdu.org/img/'+restaurant.image_path"  alt="">
 					<div class="m2_content">
 						<div class="floor_1">
-							<p class="store"><span>品牌</span> 店铺名称 </p>
-							<p class="z">保、准、票</p>
+							<p class="store"><span>品牌</span> {{restaurant.name}} </p>
+							<p class="z"><span v-for="(support,key,index) of restaurant.supports" :key="key">{{support.icon_name}}</span></p>
 						</div>
 						<div class="floor_2 clear">
-							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
+							<p class="pingjia"><span>☆☆☆☆ {{restaurant.rating}}</span> 月销量 {{restaurant.recent_order_num}}   </p>
 							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
 						</div>
 						<div class="floor_3">
 							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里 / <span class="time">40分钟</span></p>
+							<p class="p">{{restaurant.distance}} / <span class="time">{{restaurant.order_lead_time}}</span></p>
 						</div>												
 					</div>
 				</li>
-				<li>
-					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
-					<div class="m2_content">
-						<div class="floor_1">
-							<p class="store"><span>品牌</span> 店铺名称 </p>
-							<p class="z">保、准、票</p>
-						</div>
-						<div class="floor_2 clear">
-							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
-							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
-						</div>
-						<div class="floor_3">
-							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里 / <span class="time">40分钟</span></p>
-						</div>												
-					</div>
-				</li>
-				<li>
-					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
-					<div class="m2_content">
-						<div class="floor_1">
-							<p class="store"><span>品牌</span> 店铺名称 </p>
-							<p class="z">保、准、票</p>
-						</div>
-						<div class="floor_2 clear">
-							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
-							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
-						</div>
-						<div class="floor_3">
-							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里 / <span class="time">40分钟</span></p>
-						</div>												
-					</div>
-				</li>
-				<li>
-					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
-					<div class="m2_content">
-						<div class="floor_1">
-							<p class="store"><span>品牌</span> 店铺名称 </p>
-							<p class="z">保、准、票</p>
-						</div>
-						<div class="floor_2 clear">
-							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
-							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
-						</div>
-						<div class="floor_3">
-							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里 / <span class="time">40分钟</span></p>
-						</div>												
-					</div>
-				</li>
-				<li>
-					<img src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
-					<div class="m2_content">
-						<div class="floor_1">
-							<p class="store"><span>品牌</span> 店铺名称 </p>
-							<p class="z">保、准、票</p>
-						</div>
-						<div class="floor_2 clear">
-							<p class="pingjia"><span>☆☆☆☆ 4.7</span> 月销量 55   </p>
-							<p class="s"><span class="feng">蜂鸟专送</span> <span class="zhunshida">准时达</span></p>
-						</div>
-						<div class="floor_3">
-							<p class="peisong">20起送，配送费20 </p>
-							<p class="p">10公里 / <span class="time">40分钟</span></p>
-						</div>												
-					</div>
-				</li>
+			
 			</ul>
 		</div>
 	</div>
@@ -182,9 +115,10 @@
 				  .then(function (response) {		//{data:{[],[]...}}
 				    console.log(response.data);		//{[],[]...}
 					_this.headTitle = response.data.name;   //根据经纬度获取地位的地点名称
-					_this.latitude = response.data.latitude;
-					_this.longitude = response.data.longitude;
+					_this.$store.state.latitude = response.data.latitude;  //存储经度
+					_this.$store.state.longitude = response.data.longitude;//存储维度
 					_this.$store.commit("SearchHistoryToLacal",response.data); //搜索历史保存在本地
+					_this.getShops();
 				  })
 				  .catch(function (error) {
 				    console.log(error);
@@ -193,9 +127,9 @@
 
 			getShops(){
 				var _this = this;
-				var latitude  = this.latitude;
-				var longitude = this.longitude;
-				console.log("latitude:"+latitude);
+				var latitude  = this.$store.state.latitude;
+				var longitude = this.$store.state.longitude;
+				console.log("经度："+latitude,"纬度："+longitude);
 				axios.get("http://cangdu.org:8001/shopping/restaurants",{
 					params:{
 						latitude:latitude,
@@ -205,6 +139,7 @@
 				  .then(function (response) {		//{data:{[],[]...}}
 				    console.log("获取restaurants成功");		//{[],[]...}
 				    _this.restaurants = response.data;
+				    // _this.restaurants = response.data;
 				  })
 				  .catch(function (error) {
 				    console.log(error);
@@ -221,7 +156,7 @@
 		},
 		created(){
 			this.getDetailAddress();
-			this.getShops();
+			
 
 
 		},
@@ -261,6 +196,7 @@
 	.m2 .store{float: left;}
 	.m2 .store span{display: inline-block;width: 3rem;height: 1.2rem;text-align: center;background: #FFD930;border-radius:0.1rem;}
 	.m2 .z{float: right;}
+	.m2 .z span{border:1px solid #F3F3F3;margin-left: 0.4rem;}
 	
 	.m2 .floor_2 p{height: 2rem;line-height: 2rem;}
 	.m2 .floor_2 p span{font-size:0.7rem;}
