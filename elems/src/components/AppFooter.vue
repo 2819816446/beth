@@ -1,23 +1,16 @@
 <template>
   <div class="fd_wrap">
       <ul>
-        <li class="active">
-            <i class="iconfont icon-shouye"></i>
-            <p>首页</p>
-        </li>
-        
-        <li class="">
-            <i class="iconfont icon-sousuo"></i>
-            <p>搜索</p>
-        </li>
-        <li class="">
-            <i class="iconfont icon-shouji"></i>
-            <p>订单</p>
-        </li>
-        <li class="">
-            <i class="iconfont icon-04"></i>
-            <p>我的</p>
-        </li>        
+        <!-- 0 === 0 当当前li的index === changeActive值时 添加active类  
+          :class="{active:changeActive == 0}"  
+          :class="{active:changeActive == 1}"
+          :class="{active:changeActive == 2}"
+          :class="{active:changeActive == 3}"
+        -->
+        <li v-for="(nav,index,key) of navLists" :class="{active:changeActive == index}" @click="changeToActive(index)">
+            <i class="iconfont" v-bind:class="nav.icon"  ></i>
+            <p>{{nav.text}}</p>
+        </li>       
 
       </ul>
   </div> 
@@ -32,13 +25,35 @@ export default {
   data () {
     return {
       isShowTitle:true,
-      // isShowBack:true     //是否显示返回图标；true 显示，false不显示。
+      // isShowBack:true     //是否显示返回图标；true 
+      navLists:[
+          {
+              "icon":"icon-shouye",
+              "text":"首页"                     
+          },
+          {
+              "icon":"icon-sousuo",
+              "text":"搜索"                     
+          },
+          {
+              "icon":"icon-shouji",
+              "text":"订单"                        
+          },
+          {
+              "icon":"icon-04",
+              "text":"我的"                     
+          }
+      ],
+      changeActive:0,
     }
   },
 
 
   methods:{
-
+    // 动态添加active 的class
+    changeToActive(index){
+      this.changeActive = index;
+    }
   },
 
   

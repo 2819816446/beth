@@ -8,7 +8,7 @@
 
 		<!-- 点击后的搜索历史 -->
 		<div class="search_history" v-if="addRessList">
-			<div v-for="(address,key,index) of addRessList" class="history_list" :key="key">
+			<div v-for="(address,index,key) of addRessList" class="history_list" :key="key">
 			<router-link :to='{name:"MySite",query:{geohash:address.geohash}}'>
 				<p>{{address.name}}</p>
 				<span>{{address.address}}</span>
