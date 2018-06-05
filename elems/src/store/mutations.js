@@ -59,29 +59,33 @@ export default{
 		}
 	},
 
-	// 待完善
-	SearchRestranHistoryToLacal(state,search_data){  //search_data : [{}]
-		// var array = [];
+	// 把  搜索字符串  保存到 localStorage 的一个字段，已存在的不添加
+	SearchRestranHistoryToLacal(state,search_keyword){  //search_keyword : "aa"
+		var array = [];
 		console.log("local RestranHistory");
 		if (!localStorage.RestranHistory) { //如果没有RestranHistory直接添加
-			// array.push(search_data);							//[{...}]
-			localStorage.RestranHistory=JSON.stringify(search_data);	// "[{}]"  字符串。 以便localStorage直观显示
+			array.push(search_keyword);							//["aa"]
+			localStorage.RestranHistory=JSON.stringify(array);	// "["aa"]"  字符串。 以便localStorage直观显示
 		}else{  //如果有
-			var dataFromLocal = JSON.parse(localStorage.RestranHistory); //字符串转对象 [{...}]
+			var dataFromLocal = JSON.parse(localStorage.RestranHistory); //字符串转对象 ["aa","bb"....]
 			var flag = false;//标记是否已经存在。默认不存在（false）
 			dataFromLocal.forEach(value=> {
-				if (value.name == search_data[0].name) {
+				if (value == search_keyword) {
 					flag = true;
 				}
 			});
 			if (!flag) { //如果不存在（flag=false）则添加
-				dataFromLocal.push(search_data);
+				dataFromLocal.push(search_keyword);
 				localStorage.RestranHistory=JSON.stringify(dataFromLocal);
 				console.log(localStorage.RestranHistory)
 			}
 
 		}
 	},
+	// 清空搜索字符串
+	// ClearSearchRestranHistory(){
+	// 	localStorage.RestranHistory = [];
+	// },
 
 
 

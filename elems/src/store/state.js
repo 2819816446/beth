@@ -2,6 +2,7 @@ export default{
 	allCityList:[],//所有城市
 	hotCityList:[], //热门城市
 	searchHistory:[],//地址搜索历史
+	RestranHistory:[],//搜索页面的 搜索历史
 	latitude: '', // 当前位置纬度
 	longitude: '', // 当前位置经度
 	cartList: {}, // 加入购物车的商品列表

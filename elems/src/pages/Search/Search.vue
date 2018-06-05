@@ -18,17 +18,18 @@
 			<!-- </router-link> -->
 			</div>
 		</div>
-
+		
+		<!-- localStorage 里保存的搜索历史 -->
 		<div class="search_history" v-if="!restRanList.length">
 			<p class="f">搜索历史</p>
 			<div v-for="(Restran,index,key) of RestranHistory" class="history_list" :key="key" >
 			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
-				<p style="float:left;">{{Restran.name}} </p>
+				<p style="float:left;">{{Restran}} </p>
 				<p style="float:right;">X</p>
 			<!-- </router-link> -->
 			</div>
 
-			<p v-if="this.restRanList.length" class="clear_all" @click="clearAllRestran()">清空所有</p>		
+			<p v-if="!this.restRanList.length" class="clear_all" @click="clearAllRestran()">清空搜索历史</p>		
 		</div>
 	</div>
 </template>
@@ -58,10 +59,12 @@
 		computed:{
 			RestranHistory(){
 				if (localStorage.RestranHistory) {
-					return JSON.parse(localStorage.RestranHistory);	//[{},{}...]
+					return JSON.parse(localStorage.RestranHistory);	//["aa","aa"...]
 				}else{
 					return [];
 				}
+
+
 			}
 		},
 		methods:{
@@ -98,8 +101,8 @@
 				    }else{
 
 					    _this.restRanList =response.data; 
-						_this.$store.commit("SearchRestranHistoryToLacal",response.data); //搜索历史保存在本地
-
+						_this.$store.commit("SearchRestranHistoryToLacal",keyword); //搜索历史保存在本地(关键字即可)
+						_this.$store.state.RestranHistory = this.RestranHistory;
 
 				    }
 
@@ -110,9 +113,11 @@
 				 });				
 
 			},
+
 			clearAllRestran(){
-				this.restRanList = [];
-			}	
+				localStorage.RestranHistory = [];
+
+			},
 		
 
 		},
