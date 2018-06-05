@@ -93,5 +93,9 @@ export default{
 	setAccesstokenWhenRefresh(state){
 		state.accesstoken = localStorage.getItem("accesstoken");
 		state.loginname = localStorage.getItem("loginname");
+	},
+
+	setGeohash(state,geohash){
+		state.geohash = geohash;
 	}
 }

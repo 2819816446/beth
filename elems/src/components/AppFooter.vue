@@ -7,7 +7,7 @@
           :class="{active:changeActive == 2}"
           :class="{active:changeActive == 3}"
         -->
-        <li v-for="(nav,index,key) of navLists" :class="{active:changeActive == index}" @click="changeToActive(index)">
+        <li v-for="(nav,index,key) of navLists" :class="{active:changeActive === index}" @click="changeToActive(index)" >
             <i class="iconfont" v-bind:class="nav.icon"  ></i>
             <p>{{nav.text}}</p>
         </li>       
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+ import {mapState} from 'vuex'
+import MySite from '../pages/MySite/MySite.vue'
 
 
 export default {
@@ -47,14 +49,32 @@ export default {
       changeActive:0,
     }
   },
+  computed:{
+   ...mapState([
+     // 映射 this.geohash 为 store.state.geohash
+        'geohash'
+    ]),
+  },
 
 
   methods:{
-    // 动态添加active 的class
+    // 动态添加active 的class    click事件
     changeToActive(index){
       this.changeActive = index;
-    }
-  },
+      if (index == 0) {
+        var geohash = this.geohash;
+        this.$router.push({name:'MySite', query: {geohash}});
+      }else if (index == 1) {
+        console.log(this.changeActive);
+        this.$router.push({path:'/search'});
+
+
+      }
+    },
+
+
+
+  }, 
 
   
 

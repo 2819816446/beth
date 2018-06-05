@@ -110,7 +110,7 @@
 			getDetailAddress(){
 				var _this = this;
 				var geohash = this.$route.query.geohash;
-				// this.commit("setGeohash",geohash);
+				_this.$store.commit("setGeohash",geohash);
 				var url ='http://cangdu.org:8001/v2/pois/'+geohash;
 				axios.get(url)
 				  .then(function (response) {		//{data:{[],[]...}}

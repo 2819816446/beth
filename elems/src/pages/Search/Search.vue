@@ -13,7 +13,6 @@
 			<div v-for="(Restran,index,key) of restRanList" class="history_list" :key="key">
 			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
 				<p style="float:left;">{{Restran.name}} </p>
-				<p style="float:right;">X</p>
 				
 			<!-- </router-link> -->
 			</div>
@@ -100,9 +99,22 @@
 						});
 				    }else{
 
-					    _this.restRanList =response.data; 
-						_this.$store.commit("SearchRestranHistoryToLacal",keyword); //搜索历史保存在本地(关键字即可)
-						_this.$store.state.RestranHistory = this.RestranHistory;
+				    	// 返回成功 但是数据为空
+				    	if (!response.data.length) {
+						   _this.$vux.toast.show({
+							   	text:'未找到相关店铺或美食！',
+							   	position:'top',
+							   	type:'text',
+							   	time:3000
+							});
+						// 返回成功 并且有数据
+				    	}else{
+
+						    _this.restRanList =response.data; 
+							_this.$store.commit("SearchRestranHistoryToLacal",keyword); //搜索历史保存在本地(关键字即可)
+							_this.$store.state.RestranHistory = this.RestranHistory;
+				    	}
+
 
 				    }
 
