@@ -97,5 +97,9 @@ export default{
 
 	setGeohash(state,geohash){
 		state.geohash = geohash;
+	},
+	// 设置 底部（AppFooter）导航状态的值 
+	setChangeActive(state,index){
+		state.changeActive = index;
 	}
 }

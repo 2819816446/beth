@@ -3,6 +3,7 @@ export default{
 	hotCityList:[], //热门城市
 	searchHistory:[],//地址搜索历史
 	RestranHistory:[],//搜索页面的 搜索历史
+	changeActive:0,  //导航底部active的状态 0 1 2 3 代表第几个选中
 	latitude: '', // 当前位置纬度
 	longitude: '', // 当前位置经度
 	cartList: {}, // 加入购物车的商品列表

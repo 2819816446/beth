@@ -46,13 +46,14 @@ export default {
               "text":"我的"                     
           }
       ],
-      changeActive:0,
+      // changeActive:0,
     }
   },
   computed:{
    ...mapState([
      // 映射 this.geohash 为 store.state.geohash
-        'geohash'
+        'geohash',
+        'changeActive'
     ]),
   },
 
@@ -60,14 +61,17 @@ export default {
   methods:{
     // 动态添加active 的class    click事件
     changeToActive(index){
-      this.changeActive = index;
+      /* 
+      通过本地的 this.changeActive=index 赋值改变changeActive值，不能【实时】的切换状态，需要存储到state里去，通过...mapState 实时映射this.changeActive值，实现实时切换
+          注意：要求实时的数据都需要保存到vuex的state里去
+      */
+      // this.changeActive = index;
+      this.$store.commit("setChangeActive",index);
       if (index == 0) {
         var geohash = this.geohash;
         this.$router.push({name:'MySite', query: {geohash}});
       }else if (index == 1) {
-        console.log(this.changeActive);
         this.$router.push({path:'/search'});
-
 
       }
     },
