@@ -8,33 +8,6 @@ export default{
 		state.hotCityList = data.data;
 	},
 
-	// SearchHistoryToLacal(state,search_data){
-	// 	var array = [];
-	// 	console.log("local");
-	// 	if (!localStorage.SearchHistory) { //如果没有SearchHistory直接添加
-	// 		// var data = JSON.stringify(search_data);  //对象---字符串
-	// 		array.push(search_data);
-	// 		var data = JSON.stringify(array);  //对象---字符串
-	// 		console.log(array);
-	// 		localStorage.SearchHistory=array;
-	// 		console.log(localStorage.SearchHistory);
-
-
-	// 	}else{  //如果有
-	// 		// var dataFromLocal = JSON.parse(localStorage.SearchHistory); //字符串转对象
-	// 		var dataFromLocal = localStorage.SearchHistory; //字符串转对象
-	// 		dataFromLocal.forEach(function (value,key) {
-	// 			if (!value.geohash == search_data.geohash) {
-	// 				array.push(JSON.stringify(search_data));
-	// 				localStorage.SearchHistory=array;
-	// 				console.log(localStorage.SearchHistory)
-	// 			}else{
-	// 				return;
-	// 			}
-	// 		});
-
-	// 	}
-	// },
 	// 把对象保存到 localStorage 的一个字段，已存在的不添加
 	SearchHistoryToLacal(state,search_data){
 		var array = [];
@@ -82,6 +55,22 @@ export default{
 
 		}
 	},
+
+	// 搜索页面相关 搜索记录  mutation 
+	setRH(state,data){ //data: '["aa","bb"..]'
+		state.RestranHistory = JSON.parse(data);	
+	},
+	//清空
+    ClearRH(state){ //data: '["aa","bb"..]'
+		state.RestranHistory = [];	
+		localStorage.RestranHistory = [];
+	},
+	// 只刷新页面
+	reflashRH(state){  
+		state.RestranHistory = JSON.parse(localStorage.RestranHistory);	 //localStorage.RestranHistory : "['aa','bb'....]"
+	},
+
+
 	// 清空搜索字符串
 	// ClearSearchRestranHistory(){
 	// 	localStorage.RestranHistory = [];

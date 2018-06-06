@@ -72,7 +72,6 @@ export default {
         this.$router.push({name:'MySite', query: {geohash}});
       }else if (index == 1) {
         this.$router.push({path:'/search'});
-
       }
     },
 

@@ -36,3 +36,7 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app-box')
+
+
+
+store.commit("reflashRH");

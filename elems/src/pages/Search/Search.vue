@@ -12,7 +12,7 @@
 		<div class="search_history" v-if="restRanList">
 			<div v-for="(Restran,index,key) of restRanList" class="history_list" :key="key">
 			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
-				<p style="float:left;">{{Restran.name}} </p>
+				<p style="float:left;" @click="Select()">{{Restran.name}} </p>
 				
 			<!-- </router-link> -->
 			</div>
@@ -56,17 +56,31 @@
 			"app-footer":AppFooter
 		},
 		computed:{
+			// 搜索记录 ，需要实时的都需要存储在vuex里，不能直接去localStorage 获取,界面不能实时更新的。
+			// 同时，解决，刷新后的vuex数据清空问题
 			RestranHistory(){
-				if (localStorage.RestranHistory) {
-					return JSON.parse(localStorage.RestranHistory);	//["aa","aa"...]
+				// 从local 拿
+				// if (localStorage.RestranHistory.length) {
+				// 	return JSON.parse(localStorage.RestranHistory);	//["aa","aa"...]
+				// }else{
+				// 	return [];
+				// }
+
+				// 从vuex拿
+
+				if (this.$store.state.RestranHistory) {
+					return this.$store.state.RestranHistory;
 				}else{
 					return [];
 				}
 
 
+
 			}
 		},
 		methods:{
+
+
 			// http://cangdu.org:8001/v4/restaurants
 			/*
 			geohash 
@@ -112,7 +126,9 @@
 
 						    _this.restRanList =response.data; 
 							_this.$store.commit("SearchRestranHistoryToLacal",keyword); //搜索历史保存在本地(关键字即可)
-							_this.$store.state.RestranHistory = this.RestranHistory;
+
+							// 设置state 的 RestranHistory；
+							_this.$store.commit("setRH",localStorage.RestranHistory);
 				    	}
 
 
@@ -127,9 +143,22 @@
 			},
 
 			clearAllRestran(){
-				localStorage.RestranHistory = [];
+				this.$vux.toast.show({
+				   	text:'清空成功！',
+				   	position:'top',
+				   	type:'text',
+				   	time:3000
+				});
+				// 清空后 两个地方都清空
+				
+				this.$store.commit("ClearRH");
 
 			},
+
+			// 点击  搜索出来的选项  
+			Select(){
+
+			}
 		
 
 		},
