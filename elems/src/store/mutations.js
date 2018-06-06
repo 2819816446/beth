@@ -56,7 +56,7 @@ export default{
 		}
 	},
 
-	// 搜索页面相关 搜索记录  mutation 
+	// 搜索页面相关 搜索记录  mutation  -------start------
 	setRH(state,data){ //data: '["aa","bb"..]'
 		state.RestranHistory = JSON.parse(data);	
 	},
@@ -69,6 +69,14 @@ export default{
 	reflashRH(state){  
 		state.RestranHistory = JSON.parse(localStorage.RestranHistory);	 //localStorage.RestranHistory : "['aa','bb'....]"
 	},
+	deleteOne(state,index){
+		state.RestranHistory.splice(index,1);  //state.RestranHistory : ["aa","bb"]  
+
+		localStorage.RestranHistory = JSON.stringify(state.RestranHistory); //" ["aa","bb"]"
+		// JSON.parse(localStorage.RestranHistory).splice(index,1);
+	},
+
+	// 搜索页面相关 搜索记录  mutation  --------end------
 
 
 	// 清空搜索字符串

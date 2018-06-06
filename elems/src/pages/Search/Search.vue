@@ -24,7 +24,7 @@
 			<div v-for="(Restran,index,key) of RestranHistory" class="history_list" :key="key" >
 			<!-- <router-link :to='{name:"MySite",query:{geohash:Restran.geohash}}'> -->
 				<p style="float:left;">{{Restran}} </p>
-				<p style="float:right;">X</p>
+				<p style="float:right;" @click="deleteOne(index)">X</p>
 			<!-- </router-link> -->
 			</div>
 
@@ -153,6 +153,11 @@
 				
 				this.$store.commit("ClearRH");
 
+			},
+
+			// 删除单条
+			deleteOne(index){
+				this.$store.commit("deleteOne",index);
 			},
 
 			// 点击  搜索出来的选项  
