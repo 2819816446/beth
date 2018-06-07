@@ -7,6 +7,8 @@ import Home from '../pages/home/Home.vue'
 import SelectCity from '../pages/SelectCity/SelectCity.vue'
 import MySite from '../pages/MySite/MySite.vue'
 import Search from '../pages/Search/Search.vue'
+import OrderList from '../pages/OrderList/OrderList.vue'
+import Profile from '../pages/Profile/Profile.vue'
 
 
 Vue.use(Router)
@@ -42,6 +44,16 @@ Vue.use(Router)
           path:'/mysite',
           name:'MySite',
           component:MySite
+        },
+        {
+          path:'/order',
+          name:'OrderList',
+          component:OrderList
+        },
+        {
+          path:'/profile',
+          name:'Profile',
+          component:Profile
         }
 
       ]

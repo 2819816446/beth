@@ -201,7 +201,7 @@
 	.search_history p.f{border-bottom: 1px solid #EAEAEA;margin-left: 1rem;}
 
 	.history_list{width: 100%;height: 3rem;background: white;padding: 0.5rem;box-sizing: border-box;border-bottom: 2px solid #EAEAEA;}
-	.history_list p{font-size: 1.2xxx路xxx街xxx路xxx街rem;}
+	.history_list p{font-size: 1.2rem;}
 	.history_list span{font-size: 1rem;color: #999999;}
 
 	.clear_all{width: 100%;height: 2.5rem;background:white;text-align: center;line-height: 2.5rem;font-size: 1.3rem;color: #666666;}

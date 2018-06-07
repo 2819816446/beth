@@ -73,6 +73,11 @@ export default {
       }else if (index == 1) {
         this.$router.push({path:'/search'});
       }
+      else if (index == 2) {
+         this.$router.push({path:'/order'});
+      }else if (index == 3) {
+         this.$router.push({path:'/profile'});
+      }
     },
 
 

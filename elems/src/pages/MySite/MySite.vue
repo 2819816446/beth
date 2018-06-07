@@ -214,6 +214,6 @@
 	.m2 .floor_3 p span,.m2 .floor_3 p{font-size:0.7rem;}
 
 	/*.m2 p.pingjia span{font-size: 0.7rem;}*/
-	.m2 .floor_3 p.p{float: right;width: 50%;height: 1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+	.m2 .floor_3 p.p{float: right;width: 50%;height: 1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align: right;}
 	.m2 .floor_3 .time{color: #3190E8;}
 </style>
