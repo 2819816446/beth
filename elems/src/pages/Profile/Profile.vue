@@ -33,14 +33,33 @@
 				</div>
 			</div>
 			<div class="m3 clear">
-				<p>我的订单<i class="iconfont icon-xiangyou"></i></p>
-				<p>积分商城<i class="iconfont icon-xiangyou"></i></p>
-				<p>饿了么会员卡<i class="iconfont icon-xiangyou"></i></p>
+				<p>
+					<i class="iconfont icon-danju"></i>
+					我的订单
+					<i class="iconfont icon-xiangyou"></i>
+				</p>
+				<p>
+					<i class="iconfont icon-shangcheng"></i>
+					积分商城
+					<i class="iconfont icon-xiangyou"></i>
+				</p>
+				<p>
+					<i class="iconfont icon-huangguan"></i>
+					饿了么会员卡
+					<i class="iconfont icon-xiangyou"></i>
+				</p>
 			</div>	
 
 			<div class="m4 clear">
-				<p>服务中心<i class="iconfont icon-xiangyou"></i></p>
-				<p>下载饿了么APP<i class="iconfont icon-xiangyou"></i></p>
+				<p>
+					<i class="iconfont icon-kefu"></i>
+					服务中心
+					<i class="iconfont icon-xiangyou"></i></p>
+				<p>
+					<i class="iconfont icon-xiazai"></i>
+					下载饿了么APP
+					<i class="iconfont icon-xiangyou"></i>
+				</p>
 			</div>						
 		</div>
 
@@ -139,10 +158,10 @@ rem
 	.box .m2 p.score_title{font-size: 0.8rem;}
 
 	.box .m3{margin-top: 0.5rem;background: white;height:9rem;width: 100%;box-sizing: border-box;position: relative; }
-	.box .m3 p{height: 3rem;border-bottom: 2px solid #E6E6E6;line-height: 3rem;font-size: 1rem;padding-left: 2rem;position: relative;}
-	.box .m3 p i{position: absolute;top: 0.1rem;right: 1rem;font-size: 0.8rem;}
+	.box .m3 p{height: 3rem;border-bottom: 2px solid #E6E6E6;line-height: 3rem;font-size: 1rem;padding-left: 1rem;position: relative;}
+	.box .m3 p i.icon-xiangyou{position: absolute;top: 0.1rem;right: 1rem;font-size: 0.8rem;}
 
-	.box .m4{margin-top: 0.5rem;background: white;height:6rem;width: 100%;box-sizing: border-box;position: relative; }
-	.box .m4 p{height: 3rem;border-bottom: 2px solid #E6E6E6;line-height: 3rem;font-size: 1rem;padding-left: 2rem;position: relative;}
-	.box .m4 p i{position: absolute;top: 0.1rem;right: 1rem;font-size: 0.8rem;}
+	.box .m4{margin: 0.5rem 0 3rem 0;background: white;height:6rem;width: 100%;box-sizing: border-box;position: relative; }
+	.box .m4 p{height: 3rem;border-bottom: 2px solid #E6E6E6;line-height: 3rem;font-size: 1rem;padding-left: 1rem;position: relative;}
+	.box .m4 p i.icon-xiangyou{position: absolute;top: 0.1rem;right: 1rem;font-size: 0.8rem;}
 </style>
