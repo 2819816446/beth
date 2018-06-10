@@ -1,5 +1,6 @@
 <template>
 	<div class="mySite_wrap">
+		<!-- <router-view></router-view> -->
 		<app-header :title="headTitle" :isShowBack="false"></app-header>
 		<app-footer></app-footer>
 
@@ -49,7 +50,9 @@
 			<p><i class="iconfont icon-tiyan"></i> <span>附近商家</span></p>
 			<ul>
 				<li v-for="(restaurant,key,index) of restaurants" :key="key">
+					<router-link :to='{name:"Shop",query:{id:restaurant.id}}'>
 					<img v-bind:src="'https://elm.cangdu.org/img/'+restaurant.image_path"  alt="">
+					</router-link>
 					<div class="m2_content">
 						<div class="floor_1">
 							<p class="store"><span>品牌</span> {{restaurant.name}} </p>
@@ -64,6 +67,7 @@
 							<p class="p">{{restaurant.distance}} / <span class="time">{{restaurant.order_lead_time}}</span></p>
 						</div>												
 					</div>
+
 				</li>
 			
 			</ul>
