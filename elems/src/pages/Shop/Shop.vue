@@ -30,9 +30,48 @@
 			</ul>
 		</div>
 
-		<div class="m3">
-			<!-- <div class="m3_left"></div> -->
-			<!-- <div class="m3_right"></div> -->
+		<div class="m3_wrap">
+			
+			<div class="m3">
+				<div class="m3_left">
+					<ul>
+						<li class="active hot">
+							<i class="back iconfont icon-29_rexiao"></i>
+							热销版
+						</li>
+						<li>热销版</li>
+						<li>热销版</li>
+					</ul>
+				</div>
+				<div class="m3_right">
+					<ul>
+						<li class="item">
+							<h2>热销榜 <span class="tips">大家喜欢吃，才叫真好吃。</span></h2>
+							<div class="item_list">
+								<img class="avatar" src="../../assets/imgage/m2/m2_1.jpeg"  alt="">
+								<div class="msg">
+									<h3>草莓1</h3>
+									<p class="intro">草莓1好吃</p>
+									<p><span>月销量5555份</span> <span class="haopin">好评率95%</span></p>
+									<p class="count"> <span>6.2折</span> </p>
+									<div class="price">
+										<p class="price_1">250起</p>
+										<p class="jiajian">
+											<i class="iconfont icon-jianhao"></i>
+											<span>11</span>
+											<i class="iconfont icon-jiahao1"></i>
+										 </p>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			aaaa
 		</div>
 		
 	</div>
@@ -89,6 +128,10 @@
 	
 
 <style>
+
+	html,body{width: 100%;height: 100%;}
+	#app{height: 100%;}
+	li{list-style: none;}
 	body{background: #F5F5F5;height: 100%;}
 	.shop_wrap{width: 100%;height: 100%;display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;flex-direction:column;}
 	/*height: 8rem;*/
@@ -115,7 +158,29 @@
 	.tabs ul li.active{border-bottom: 2px solid #3190E8;color: #3190E8;}
 	/*content*/
 	/*.shop_wrap .m3{display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;}*/
-	.shop_wrap .m3{flex: auto;min-height: 100vh;}
-	.shop_wrap .m3 .m3_left{width: 4rem;height: 20rem;}
+	.shop_wrap .m3_wrap{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+	.shop_wrap .m3{width: 100%;height: 100%;display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;}
+	.shop_wrap .m3 .m3_left{width: 5rem;height: 100%;}
 	.shop_wrap .m3 .m3_right{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;background: white;}
+
+	.m3_left li{width: 5rem;height:4rem;text-align: left;line-height: 4rem;border-bottom: 1px solid #E6E6E6; overflow: hidden;list-style: none;}
+	.m3_left li.active{background: white;border-left: 2px solid #3190E8;}
+	.m3_left li.hot i{font-size: 1.2rem;color: red;}
+
+	/*右边商品*/
+	.m3_right li.item h2{width: 100%;height: 3rem;background: #F5F5F5;font-size: 1.2rem;padding-left: 0.7rem;line-height: 3rem;}
+	.m3_right li.item h2 span.tips{font-size: 0.8rem;padding-left: 0.3rem;color: gray;}
+	.item .item_list{display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;padding: 0.8rem;border-bottom: 2px solid #F5F5F5;}
+	.item .item_list img{width: 4rem;height: 4rem;border-radius: 0.5rem;}
+	.item .item_list .msg{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;margin-left: 0.8rem;}
+	.item  .msg h3{width: 100%;height: 1.3rem;line-height: 1.36rem;overflow: hidden;}
+	.item  .msg .intro{font-size: 0.8rem;height: 1.5rem;line-height: 1.5rem;overflow: hidden;color: gray;}
+	.item  .msg .intro .haopin{padding-left: 0.3rem;}
+	.item  .msg .count span{color: red;border: 1px solid red;border-radius: 0.3rem;font-size: 0.8rem;}
+	.item  .msg div.price{display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;}
+	.item  .msg div.price p.price_1{width: 8rem;overflow: hidden;height: 1.3rem;}
+	.item  .msg div.price .jiajian i.icon-jianhao,.item  .msg div.price .jiajian span{visibility:hidden}
+
+	/*footer*/
+	.footer{height: 3rem;width: 100%;background: black;position: absolute;bottom: 0;left: 0;z-index: 100;}
 </style>
