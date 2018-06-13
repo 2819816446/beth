@@ -71,5 +71,5 @@
 	.shop_hd_1 img{width: 5rem;height: 5rem;border-radius: 0.5rem;}
 	.shop_hd_1 .msg{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;box-sizing: border-box;height: 5rem;position: relative;margin-left: 0.5rem;}
 	.msg h2{font-size: 1.3rem;line-height: 2rem;}
-	.msg .p_info{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width: 100%;}
+	.msg .p_info{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width: 17rem;}
 </style>
