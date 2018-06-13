@@ -158,17 +158,17 @@
 	.tabs ul li.active{border-bottom: 2px solid #3190E8;color: #3190E8;}
 	/*content*/
 	/*.shop_wrap .m3{display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;}*/
-	.shop_wrap .m3_wrap{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;}
+	.shop_wrap .m3_wrap{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;overflow: hidden;}
 	.shop_wrap .m3{width: 100%;height: 100%;display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;}
 	.shop_wrap .m3 .m3_left{width: 5rem;height: 100%;}
-	.shop_wrap .m3 .m3_right{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;background: white;}
+	.shop_wrap .m3 .m3_right{-webkit-box-flex: 1;-webkit-flex: 1;flex: 1;background: white;overflow-y: auto;}
 
 	.m3_left li{width: 5rem;height:4rem;text-align: left;line-height: 4rem;border-bottom: 1px solid #E6E6E6; overflow: hidden;list-style: none;}
 	.m3_left li.active{background: white;border-left: 2px solid #3190E8;}
 	.m3_left li.hot i{font-size: 1.2rem;color: red;}
 
 	/*右边商品*/
-	.m3_right li.item h2{width: 100%;height: 3rem;background: #F5F5F5;font-size: 1.2rem;padding-left: 0.7rem;line-height: 3rem;}
+	.m3_right li.item h2{width: 100%;height: 3rem;background: #F5F5F5;font-size: 1.2rem;padding-left: 0.7rem;line-height: 3rem;box-sizing: border-box;}
 	.m3_right li.item h2 span.tips{font-size: 0.8rem;padding-left: 0.3rem;color: gray;}
 	.item .item_list{display:-webkit-box;display:-webkit-flex;display:flex; display:-moz-box;padding: 0.8rem;border-bottom: 2px solid #F5F5F5;}
 	.item .item_list img{width: 4rem;height: 4rem;border-radius: 0.5rem;}
@@ -182,5 +182,6 @@
 	.item  .msg div.price .jiajian i.icon-jianhao,.item  .msg div.price .jiajian span{visibility:hidden}
 
 	/*footer*/
-	.footer{height: 3rem;width: 100%;background: black;position: absolute;bottom: 0;left: 0;z-index: 100;}
+	/*position: absolute;bottom: 0;left: 0;z-index: 100;*/
+	.footer{height: 3rem;width: 100%;background: black;}
 </style>
