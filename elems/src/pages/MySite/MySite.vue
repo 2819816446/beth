@@ -176,7 +176,7 @@
 </script>
 
 
-<style>
+<style scoped>
 	.clear{clear: both;}
 	.mySite_wrap{background: #F5F5F5;}
 	.mySite_wrap li{list-style: none;}
